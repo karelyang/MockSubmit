@@ -177,8 +177,7 @@ public class Main {
                     Map<Integer, String[]> persons = RWExcelFile.cache_data.size() > 0 ? RWExcelFile.cache_data : RWExcelFile.readFile();
 
                     http.post(code, persons);
-                    if (MockHttp.cache_result.getOrDefault(0, "").contains("验证码")) {
-                        MockHttp.cache_result.remove(0);
+                    if (MockHttp.cache_result.remove(0, "验证码错！")) {
                         result.set(-1);
                     } else if (MockHttp.cache_result.size() == persons.size()) {
                         RWExcelFile.writeResult(MockHttp.cache_result, 6);

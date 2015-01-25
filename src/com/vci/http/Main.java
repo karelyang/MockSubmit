@@ -178,6 +178,7 @@ public class Main {
 
                     http.post(code, persons);
                     if (MockHttp.cache_result.getOrDefault(0, "").contains("验证码")) {
+                        MockHttp.cache_result.remove(0);
                         result.set(-1);
                     } else if (MockHttp.cache_result.size() == persons.size()) {
                         RWExcelFile.writeResult(MockHttp.cache_result, 6);

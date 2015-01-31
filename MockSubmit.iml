@@ -19,7 +19,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="commons-io.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/commons-io.jar!/" />
@@ -28,7 +28,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="commons-logging-1.1.3.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/commons-logging-1.1.3.jar!/" />
@@ -37,7 +37,16 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/httpcore-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="httpclient-4.3.6.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/httpclient-4.3.6.jar!/" />
@@ -46,25 +55,25 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library name="httpcore-4.3.3.jar">
+    <orderEntry type="module-library">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/httpcore-4.3.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/httpmime-4.3.6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library name="poi-3.10.1-20140818.jar">
+    <orderEntry type="module-library">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/poi-3.10.1-20140818.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/poi-3.11-20141221.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/swt_x64.jar!/" />
@@ -76,7 +85,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="" scope="RUNTIME">
+    <orderEntry type="module-library" scope="RUNTIME">
       <library name="swt_x86.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/swt_x86.jar!/" />

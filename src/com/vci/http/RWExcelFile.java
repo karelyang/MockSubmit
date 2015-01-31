@@ -1,13 +1,7 @@
 package com.vci.http;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,8 +25,8 @@ public class RWExcelFile {
 
     public static Map<Integer, String[]> readFile() throws IOException {
         try (FileInputStream fis = new FileInputStream(FILE_NAME)) {
-            HSSFWorkbook workbook = new HSSFWorkbook(fis);
-            HSSFSheet sheet = workbook.getSheetAt(0);
+            Workbook workbook = new HSSFWorkbook(fis);
+            Sheet sheet = workbook.getSheetAt(0);
 
             StreamSupport.stream(sheet.spliterator(), true)
                     .filter(row -> row.getRowNum() != 0 && row.getCell(0) != null && !row.getCell(0).getStringCellValue().equals(""))
@@ -57,17 +51,17 @@ public class RWExcelFile {
         try (FileInputStream fis = new FileInputStream(FILE_NAME);
              FileOutputStream out = new FileOutputStream(BAK_FILE_NAME)) {
 
-            HSSFWorkbook workbook = new HSSFWorkbook(fis);
-            HSSFSheet sheet = workbook.getSheetAt(0);
+            Workbook workbook = new HSSFWorkbook(fis);
+            Sheet sheet = workbook.getSheetAt(0);
 
             CellStyle style = workbook.createCellStyle();
             Font font = workbook.createFont();
-            font.setColor(HSSFColor.RED.index);
+            font.setColor(IndexedColors.RED.index);
             style.setFont(font);
             style.setLocked(false);
 
             results.forEach((lineNum, String) -> {
-                HSSFCell cell = sheet.getRow(lineNum).createCell(col);
+                Cell cell = sheet.getRow(lineNum).createCell(col);
                 cell.setCellValue(String);
                 cell.setCellStyle(style);
             });
@@ -76,7 +70,6 @@ public class RWExcelFile {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            //输入输出流不关闭时，不能正常重命名
             File file = new File(FILE_NAME);
             file.delete();
 
@@ -86,23 +79,22 @@ public class RWExcelFile {
     }
 
     private static String getStringCellValue(Cell cell) {
-        String strCell;
+        String strCell = "";
         switch (cell.getCellType()) {
-            case HSSFCell.CELL_TYPE_STRING:
+            case Cell.CELL_TYPE_BLANK:
+                break;
+            case Cell.CELL_TYPE_STRING:
                 strCell = cell.getRichStringCellValue().getString();
                 break;
-            case HSSFCell.CELL_TYPE_NUMERIC:
-                if (HSSFDateUtil.isCellDateFormatted(cell))
-                    strCell = dateFormat.format((HSSFDateUtil.getJavaDate(cell
+            case Cell.CELL_TYPE_NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell))
+                    strCell = dateFormat.format((DateUtil.getJavaDate(cell
                             .getNumericCellValue())));
                 else
                     strCell = cell.getNumericCellValue() + "";
                 break;
-            case HSSFCell.CELL_TYPE_BOOLEAN:
+            case Cell.CELL_TYPE_BOOLEAN:
                 strCell = String.valueOf(cell.getBooleanCellValue());
-                break;
-            default:
-                strCell = "";
                 break;
         }
         return strCell.trim();
